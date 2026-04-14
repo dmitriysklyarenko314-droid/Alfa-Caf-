@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Alfa Café · Pedidos</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0F0E0C;--s:#1A1816;--s2:#232019;--g:#C8A855;--gd:#8B7635;--c:#F5EDD6;--cd:#A89E88;--gr:#6B8F5E;--wa:#25D366;--r:14px}
+body{font-family:-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--c);min-height:100dvh;overflow-x:hidden}
+.hd{text-align:center;padding:24px 16px 12px}
+.hd h1{font-size:26px;font-weight:700;letter-spacing:5px;color:var(--g);text-transform:uppercase}
+.hd p{font-size:11px;letter-spacing:3px;color:var(--cd);text-transform:uppercase;margin-top:4px}
+.tabs{display:flex;gap:6px;padding:0 16px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:8px 16px;border-radius:100px;background:var(--s);border:none;color:var(--cd);font-size:11px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;cursor:pointer}
+.tab.a{background:var(--g);color:var(--bg);font-weight:700}
+.db{margin:0 16px 14px;padding:10px 14px;background:linear-gradient(135deg,#1e2a18,#1a1816);border:1px solid #2d3a22;border-radius:var(--r);font-size:12px;color:var(--gr);line-height:1.6}
+.db b{color:var(--c)}
+.tl{padding:0 16px 120px}
+.tc{background:var(--s);border:1px solid #2a2620;border-radius:var(--r);padding:16px;margin-bottom:10px}
+.tc.in{border-color:var(--gd);background:var(--s2)}
+.tt{display:flex;justify-content:space-between;align-items:flex-start}
+.tn{font-size:16px;font-weight:700}
+.tp{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--g);margin-top:3px}
+.tf{font-size:12px;color:var(--cd);margin-top:5px;font-style:italic}
+.pr{text-align:right;margin-left:12px;flex-shrink:0}
+.pr b{font-size:18px;color:var(--g)}
+.pr small{font-size:10px;color:var(--cd);display:block}
+.qr{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid #2a2620}
+.qb{width:36px;height:36px;border-radius:50%;border:1px solid var(--gd);background:0 0;color:var(--g);font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.qv{width:70px;text-align:center}
+.qv b{font-size:15px;font-weight:600}
+.qv small{font-size:10px;color:var(--cd)}
+.lt{font-size:14px;font-weight:600;color:var(--g)}
+.ds{font-size:10px;color:var(--gr);margin-top:2px}
+.cb{position:fixed;bottom:0;left:0;right:0;padding:16px;z-index:100;background:linear-gradient(to top,var(--bg) 70%,transparent);display:none}
+.cb.v{display:block}
+.ci{background:var(--g);border-radius:var(--r);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;box-shadow:0 -4px 30px rgba(200,168,85,.3);max-width:500px;margin:0 auto}
+.ci .n{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:1px;color:var(--bg)}
+.ci .t{font-size:24px;font-weight:700;color:var(--bg)}
+.ci .b{background:var(--bg);color:var(--g);border:none;border-radius:100px;padding:10px 20px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:none;align-items:flex-end;justify-content:center}
+.mo.o{display:flex}
+.md{background:var(--s);border-radius:20px 20px 0 0;width:100%;max-width:500px;max-height:90dvh;overflow-y:auto;padding:24px 20px 40px}
+.mh{width:40px;height:4px;border-radius:2px;background:#444;margin:0 auto 20px}
+.md h2{font-size:22px;color:var(--g);font-weight:700;margin-bottom:20px}
+.md h3{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--cd);margin:24px 0 12px}
+.oi{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #2a2620;font-size:14px}
+.oi .d{font-size:12px;color:var(--cd)}
+.oi .p{color:var(--g);font-weight:600;white-space:nowrap}
+.ot{display:flex;justify-content:space-between;padding:16px 0 0;font-size:20px;font-weight:700}
+.ot .v{color:var(--g)}
+.fg{margin-bottom:12px}
+.fg label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--cd);margin-bottom:6px}
+.fg input,.fg textarea{width:100%;padding:12px 14px;background:var(--bg);border:1px solid #2a2620;border-radius:10px;color:var(--c);font-size:15px;font-family:inherit;outline:0}
+.fg input:focus,.fg textarea:focus{border-color:var(--gd)}
+.fg textarea{resize:none;height:60px}
+.wb{width:100%;padding:16px;background:var(--wa);color:#fff;border:none;border-radius:var(--r);font-size:16px;font-weight:600;cursor:pointer;margin-top:16px;display:flex;align-items:center;justify-content:center;gap:10px}
+</style>
+</head>
+<body>
+<div class="hd"><h1>Alfa Café</h1><p>Calculadora de pedidos</p></div>
+<div class="tabs" id="tabs"></div>
+<div class="db"><b>Descuento por volumen:</b><br>► Desde 300g — 10% · ► Desde 800g — 20%</div>
+<div class="tl" id="tl"></div>
+<div class="cb" id="cb"><div class="ci" onclick="openM()"><div><div class="n" id="cn">0</div><div class="t" id="ct">0,00 €</div></div><div class="b">Ver pedido ›</div></div></div>
+<div class="mo" id="mo" onclick="closeM(event)"><div class="md" onclick="event.stopPropagation()"><div class="mh"></div><h2>Tu pedido</h2><div id="os"></div><h3>Tus datos</h3><div class="fg"><label>Nombre</label><input type="text" id="nm" placeholder="Tu nombre"></div><div class="fg"><label>Teléfono</label><input type="tel" id="ph" placeholder="+34 ..."></div><div class="fg"><label>Comentario (opcional)</label><textarea id="nt" placeholder="Indicaciones especiales..."></textarea></div><button class="wb" onclick="sendWA()"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12.05 21.785h-.01a9.84 9.84 0 01-5.022-1.377l-.36-.214-3.741.981.999-3.648-.235-.374a9.86 9.86 0 01-1.511-5.26c.002-5.45 4.436-9.884 9.889-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.89 9.884zm8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enviar por WhatsApp</button></div></div>
+<script>
+var W='34687191850',T=[
+{i:1,n:"Earl Grey Blue Flower",c:"Negros",t:"Té negro aromatizado",f:"Cítrico · Bergamota · Floral",p:7.19},
+{i:2,n:"Cereza Silvestre",c:"Negros",t:"Té negro aromatizado",f:"Cereza · Frutos rojos · Mazapán",p:7.19},
+{i:3,n:"Fresa",c:"Negros",t:"Té negro aromatizado",f:"Fresa · Nata · Floral",p:7.19},
+{i:4,n:"Cóctel Hawaii",c:"Negros",t:"Té negro aromatizado",f:"Piña · Papaya · Tropical",p:4.88},
+{i:5,n:"Assam Dikom",c:"Negros",t:"Té negro",f:"Malta · Miel · Cítrico suave",p:7.19},
+{i:6,n:"Mambo Vainilla",c:"Negros",t:"Té negro aromatizado",f:"Vainilla · Cremoso · Suave",p:7.19},
+{i:7,n:"Keemun Especial",c:"Negros",t:"Té negro",f:"Floral · Miel · Ahumado suave",p:7.19},
+{i:8,n:"Ceilán Dimbula OP Uduwela",c:"Negros",t:"Té negro",f:"Floral · Cítrico · Suave",p:4.88},
+{i:9,n:"Energy",c:"Verdes",t:"Té verde",f:"Jengibre · Piña · Ginseng",p:7.19},
+{i:10,n:"Ginseng y Limón",c:"Verdes",t:"Té verde",f:"Limón · Frescura · Herbal",p:5.34},
+{i:11,n:"Melocotón",c:"Verdes",t:"Té verde",f:"Melocotón · Maracuyá · Floral",p:5.34},
+{i:12,n:"Jasmine Chung Hao",c:"Verdes",t:"Té verde",f:"Jazmín · Floral · Suave",p:11.82},
+{i:13,n:"Green Snail",c:"Verdes",t:"Té verde",f:"Floral · Fresco · Suave",p:8.12},
+{i:14,n:"Gunpowder Templo del Cielo",c:"Verdes",t:"Té verde",f:"Herbal · Ligero · Suave",p:4.41},
+{i:15,n:"China Sencha",c:"Verdes",t:"Té verde",f:"Suave · Vegetal · Dorado",p:4.41},
+{i:16,n:"Italian Orange",c:"Frutales",t:"Té frutal",f:"Naranja · Cítrico · Dulce",p:4.88},
+{i:17,n:"Royal",c:"Frutales",t:"Té frutal",f:"Frutos rojos · Papaya · Hibisco",p:6.26},
+{i:18,n:"Limón-Jengibre",c:"Frutales",t:"Rooibos",f:"Limón · Jengibre · Cálido",p:5.34},
+{i:19,n:"Relax Herbal Dream Organic",c:"Frutales",t:"Té herbal",f:"Manzanilla · Cítrico · Herbal",p:7.19},
+{i:20,n:"Hibisco",c:"Frutales",t:"Té frutal",f:"Ácido · Frutos rojos · Floral",p:4.41},
+{i:21,n:"Té Energizante con Guaraná",c:"Frutales",t:"Té frutal",f:"Frutal · Herbal · Refrescante",p:7.19},
+{i:22,n:"Menta Nana",c:"Frutales",t:"Té herbal",f:"Menta · Fresco · Dulce",p:4.41},
+{i:23,n:"Mate Limón",c:"Mate",t:"Mate",f:"Limón · Herbal · Vigorizante",p:3.77},
+{i:24,n:"Mate Verde",c:"Mate",t:"Mate",f:"Herbal · Amargo · Vigorizante",p:3.12},
+{i:25,n:"Milk Oolong",c:"Especiales",t:"Té oolong",f:"Cremoso · Suave · Lácteo",p:11.82},
+{i:26,n:"Mango",c:"Especiales",t:"Té blanco",f:"Mango · Tropical · Suave",p:9.97}
+],C=["Todos","Negros","Verdes","Frutales","Mate","Especiales"],cart={},ac="Todos";
+function gd(g){return g>=800?20:g>=300?10:0}
+function cl(p,g){return p*1.1*(g/100)*(1-gd(g)/100)}
+function fm(n){return n.toFixed(2).replace(".",",")}
+function init(){var h="";C.forEach(function(c,i){h+='<div class="tab'+(i==0?" a":"")+'" onclick="sc(this,\''+c+'\')">'+c+'</div>'});document.getElementById("tabs").innerHTML=h;render()}
+function sc(el,c){document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("a")});el.classList.add("a");ac=c;render()}
+function render(){var list=ac=="Todos"?T:T.filter(function(t){return t.c==ac});var h="";list.forEach(function(t){var g=cart[t.i]||0,ic=g>0,d=gd(g),l=cl(t.p,g),pi=fm(t.p*1.1);h+='<div class="tc'+(ic?" in":"")+'"><div class="tt"><div><div class="tn">'+t.n+'</div><div class="tp">'+t.t+'</div><div class="tf">'+t.f+'</div></div><div class="pr"><b>'+pi+' €</b><small>/ 100g con IVA</small></div></div><div class="qr"><div style="display:flex;align-items:center"><button class="qb" onclick="cq('+t.i+',-100)">−</button><div class="qv"><b>'+g+'g</b><br><small>'+g/100+' × 100g</small></div><button class="qb" onclick="cq('+t.i+',100)">+</button></div><div style="text-align:right"><div class="lt">'+(ic?fm(l)+' €':'—')+'</div>'+(d>0?'<div class="ds">−'+d+'% descuento</div>':'')+'</div></div></div>'});document.getElementById("tl").innerHTML=h;updBar()}
+function cq(id,d){var c=cart[id]||0,n=Math.max(0,c+d);if(n==0)delete cart[id];else cart[id]=n;render()}
+function updBar(){var k=Object.keys(cart),c=k.length,tot=0;k.forEach(function(id){var t=T.find(function(x){return x.i==id});tot+=cl(t.p,cart[id])});var b=document.getElementById("cb");if(c>0){b.classList.add("v");document.getElementById("cn").textContent=c+" producto"+(c>1?"s":"");document.getElementById("ct").textContent=fm(tot)+" €"}else{b.classList.remove("v")}}
+function openM(){var k=Object.keys(cart);if(!k.length)return;var h="",tot=0;k.forEach(function(id){var t=T.find(function(x){return x.i==id}),g=cart[id],d=gd(g),l=cl(t.p,g);tot+=l;h+='<div class="oi"><div><div>'+t.n+'</div><div class="d">'+g+'g'+(d>0?' (−'+d+'% dto.)':'')+'</div></div><div class="p">'+fm(l)+' €</div></div>'});h+='<div class="ot"><span>Total</span><span class="v">'+fm(tot)+' €</span></div>';document.getElementById("os").innerHTML=h;document.getElementById("mo").classList.add("o")}
+function closeM(e){if(e.target==document.getElementById("mo"))document.getElementById("mo").classList.remove("o")}
+function sendWA(){var nm=document.getElementById("nm").value.trim(),ph=document.getElementById("ph").value.trim(),nt=document.getElementById("nt").value.trim();if(!nm){alert("Por favor, introduce tu nombre");return}if(!ph){alert("Por favor, introduce tu teléfono");return}var k=Object.keys(cart),tot=0,lines=[];k.forEach(function(id){var t=T.find(function(x){return x.i==id}),g=cart[id],d=gd(g),l=cl(t.p,g);tot+=l;var s="• "+t.n+" — "+g+"g";if(d>0)s+=" (−"+d+"%)";s+=" → "+fm(l)+"€";lines.push(s)});var m="🍵 *NUEVO PEDIDO — ALFA CAFÉ*\n\n👤 *Cliente:* "+nm+"\n📱 *Teléfono:* "+ph+"\n";if(nt)m+="💬 *Nota:* "+nt+"\n";m+="\n📋 *Pedido:*\n"+lines.join("\n")+"\n\n💰 *TOTAL: "+fm(tot)+"€* (IVA 10% incluido)";window.open("https://wa.me/"+W+"?text="+encodeURIComponent(m),"_blank")}
+init();
+</script>
+</body>
+</html>
